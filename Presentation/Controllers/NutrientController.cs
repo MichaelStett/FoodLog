@@ -6,31 +6,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodLog.Presentation
+namespace FoodLog.Presentation.ConsoleApp.Controllers
 {
-    public class Controller
+    public class NutrientController
     {
-        private readonly IService _service;
+        private readonly INutrientService _service;
 
-        public Controller(IService service)
+        public NutrientController(INutrientService service)
             => (_service) = (service);
 
-        public IEnumerable<Item> Get()
+        public IEnumerable<Nutrient> Get()
         {
-            return _service.GetItems();
+            return _service.Get();
         }
 
-        public IEnumerable<Item> Get(int id)
+        public IEnumerable<Nutrient> Get(int id)
         {
-            return _service.GetItems(id);
+            return _service.Get(id);
         }
 
-        public int Post(Item item)
+        public int Post(Nutrient item)
         {
             return _service.Add(item);
         }
 
-        public int Put(Item item)
+        public int Put(Nutrient item)
         {
             return _service.Update(item);
         }

@@ -1,12 +1,13 @@
 ﻿using FoodLog.Application;
 using FoodLog.Domain.Interfaces;
 using FoodLog.Infrastructure;
+using FoodLog.Presentation.ConsoleApp.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace FoodLog.Presentation
+namespace FoodLog.Presentation.ConsoleApp
 {
-    class Program
+    public class Startup
     {
         static void Main(string[] args)
         {
@@ -14,12 +15,6 @@ namespace FoodLog.Presentation
                 .AddInfrastructure()
                 .AddApplication()
                 .BuildServiceProvider();
-
-            var service = serviceProvider.GetService<IService>();
-
-            var controller = new Controller(service);
-
-            var result = controller.Get();
         }
     }
 }
