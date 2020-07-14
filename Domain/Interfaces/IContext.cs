@@ -10,9 +10,8 @@ namespace FoodLog.Domain.Interfaces
     public interface IContext
     {
         DbSet<Item> Items { get; set; }
-        DbSet<Category> Categories { get; set; }
-        DbSet<Nutrient> Nutrients { get; }
+        DbSet<Nutrient> Nutrients { get; set; }
 
-        void SaveChanges();
+        Task SaveChangesAsync();
     }
 }

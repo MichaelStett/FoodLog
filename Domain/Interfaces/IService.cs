@@ -1,4 +1,5 @@
 ﻿using FoodLog.Domain.Entity;
+using FoodLog.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,8 @@ namespace FoodLog.Domain.Interfaces
 {
     public interface IService
     {
-        void Seed();
+        List<Nutrient> Nutrients { get; }
 
-        List<Nutrient> GetNutrients();
+        double Calories(ENutrients nutrient, double grams);
     }
 }

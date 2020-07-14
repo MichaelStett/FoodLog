@@ -1,4 +1,5 @@
 ﻿using FoodLog.Domain.Entity;
+using FoodLog.Domain.Enums;
 using FoodLog.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,34 +16,15 @@ namespace FoodLog.Application
         public Service(IContext context)
             => (_context) = (context);
 
-        public void Seed()
-        {
-            var nutrients = new List<Nutrient>
+        public List<Nutrient> Nutrients => _context.Nutrients.ToList();
+
+        public double Calories(ENutrients nutrient, double grams)
+            => nutrient switch
             {
-                new Nutrient { Name = "Fat" },
-                new Nutrient { Name = "Carb" },
-                new Nutrient { Name = "Protein" },
+                ENutrients.Fat => 9 * grams,
+                ENutrients.Carb => 4 * grams,
+                ENutrients.Protein => 4 * grams,
+                _ => throw new ArgumentException(message: "invalid enum value", paramName: nameof(ENutrients)),
             };
-
-            _context.Nutrients.UpdateRange(nutrients);
-
-            _context.SaveChanges();
-        }
-
-        public List<Nutrient> GetNutrients()
-        {
-            if (_context is null)
-            {
-                Console.WriteLine("Context null");
-            }
-
-            if (_context.Nutrients is null)
-            {
-                Console.WriteLine("Nutrients null");
-            }
-
-
-            return _context.Nutrients.ToList();
-        }
     }
 }

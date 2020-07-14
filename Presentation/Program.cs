@@ -17,13 +17,13 @@ namespace FoodLog.Presentation
 
             var service = serviceProvider.GetService<IService>();
 
-            service.Seed();
-
-            var nutrients = service.GetNutrients();
+            var nutrients = service.Nutrients;
 
             foreach (var nutrient in nutrients)
             {
-                Console.WriteLine($"{nutrient.Id} {nutrient.Name}");
+                var calories = service.Calories(nutrient.NutrientType, nutrient.Grams);
+
+                Console.WriteLine($"{nutrient.Id} {nutrient.NutrientType} {nutrient.Grams} {calories}");
             }
 
             Console.WriteLine("Done!");

@@ -1,18 +1,24 @@
-﻿using System;
+﻿using FoodLog.Domain.Enums;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodLog.Domain.Entity
 {
-    public class Item
+    public class Item : BaseEntity
     {
-        public int Id { get; set; }
-        public int Name { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         public DateTime Date { get; set; }
 
-        public int CategoryId { get; set; }
+        [Required]
+        public int Grams { get; set; }
 
-        public List<Nutrient> Nutrients { get; set;  } = new List<Nutrient>();
+        [Required]
+        public ECategories CategoryType { get; set; }
 
+        [Required]
+        public List<Nutrient> Nutrients { get; set; } = new List<Nutrient>();
     }
 }

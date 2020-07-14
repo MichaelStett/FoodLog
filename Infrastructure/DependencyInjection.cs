@@ -1,4 +1,5 @@
-﻿using FoodLog.Domain.Interfaces;
+﻿using FoodLog.Domain;
+using FoodLog.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,11 +14,10 @@ namespace FoodLog.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddDbContext<Context>(opt =>
-                opt.UseSqlServer(@"Server=.\;Database=FoodLog;Trusted_Connection=True;MultipleActiveResultSets=true")
-            );
+            services.AddDbContext<Context>();
 
             services.AddSingleton<IContext, Context>();
+            services.AddSingleton<IDateTime, MachineDateTime>();
 
             return services;
         }
