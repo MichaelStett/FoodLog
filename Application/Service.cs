@@ -1,6 +1,8 @@
-﻿using FoodLog.Domain.Entity;
+﻿using FoodLog.Domain;
+using FoodLog.Domain.Entity;
 using FoodLog.Domain.Enums;
 using FoodLog.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +14,34 @@ namespace FoodLog.Application
     public class Service : IService
     {
         private readonly IContext _context;
+        private readonly IDateTime _dateTime;
 
-        public Service(IContext context)
-            => (_context) = (context);
+        public Service(IContext context, IDateTime dateTime)
+            => (_context, _dateTime) = (context, dateTime);
 
-        public List<Nutrient> Nutrients => _context.Nutrients.ToList();
+        public IEnumerable<Item> GetItems()
+        {
+            throw new NotImplementedException();
+        }
 
-        public double Calories(ENutrients nutrient, double grams)
-            => nutrient switch
-            {
-                ENutrients.Fat => 9 * grams,
-                ENutrients.Carb => 4 * grams,
-                ENutrients.Protein => 4 * grams,
-                _ => throw new ArgumentException(message: "invalid enum value", paramName: nameof(ENutrients)),
-            };
+        public IEnumerable<Item> GetItems(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Add(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -17,16 +17,9 @@ namespace FoodLog.Presentation
 
             var service = serviceProvider.GetService<IService>();
 
-            var nutrients = service.Nutrients;
+            var controller = new Controller(service);
 
-            foreach (var nutrient in nutrients)
-            {
-                var calories = service.Calories(nutrient.NutrientType, nutrient.Grams);
-
-                Console.WriteLine($"{nutrient.Id} {nutrient.NutrientType} {nutrient.Grams} {calories}");
-            }
-
-            Console.WriteLine("Done!");
+            var result = controller.Get();
         }
     }
 }

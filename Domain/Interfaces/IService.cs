@@ -9,8 +9,10 @@ namespace FoodLog.Domain.Interfaces
 {
     public interface IService
     {
-        List<Nutrient> Nutrients { get; }
-
-        double Calories(ENutrients nutrient, double grams);
+        IEnumerable<Item> GetItems();
+        IEnumerable<Item> GetItems(int id);
+        int Add(Item item);
+        int Update(Item item);
+        int Delete(int id);
     }
 }
