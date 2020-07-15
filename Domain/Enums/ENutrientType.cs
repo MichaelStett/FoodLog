@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodLog.Domain.Enums
 {
-    public enum ENutrients
+    public enum ENutrientType
     {
         Fat,
         Carb,

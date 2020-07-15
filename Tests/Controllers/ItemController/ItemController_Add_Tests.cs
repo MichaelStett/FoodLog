@@ -28,7 +28,7 @@ namespace Tests.Controllers
             {
                 Id = 1,
                 Name = "Tuna",
-                CategoryType = ECategories.Fish,
+                CategoryType = ECategoryType.Fish,
                 Grams = 100,
                 Date = DateTime.UtcNow
             });

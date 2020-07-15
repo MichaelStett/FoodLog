@@ -16,7 +16,7 @@ namespace FoodLog.Infrastructure.Extensions
                     Name = "Tuna",
                     Grams = 350,
                     Date = DateTime.UtcNow.Date,
-                    CategoryType = ECategories.Fish,
+                    CategoryType = ECategoryType.Fish,
                 },
                 new Item
                 {
@@ -24,7 +24,7 @@ namespace FoodLog.Infrastructure.Extensions
                     Name = "Potato",
                     Grams = 300,
                     Date = DateTime.UtcNow.Date,
-                    CategoryType = ECategories.Vegetables,
+                    CategoryType = ECategoryType.Vegetables,
                 },
                 new Item
                 {
@@ -32,20 +32,20 @@ namespace FoodLog.Infrastructure.Extensions
                     Name = "Mozzarella",
                     Grams = 100,
                     Date = DateTime.UtcNow.Date,
-                    CategoryType = ECategories.Dairy,
+                    CategoryType = ECategoryType.Dairy,
                 }
             );
 
             modelBuilder.Entity<Nutrient>().HasData(
-                new Nutrient { Id = 1, ItemId = 1, NutrientType = ENutrients.Fat,     Grams = 1.3  },
-                new Nutrient { Id = 2, ItemId = 1, NutrientType = ENutrients.Carb,    Grams = 0.0  },
-                new Nutrient { Id = 3, ItemId = 1, NutrientType = ENutrients.Protein, Grams = 28.0 },
-                new Nutrient { Id = 4, ItemId = 2, NutrientType = ENutrients.Fat,     Grams = 0.09 },
-                new Nutrient { Id = 5, ItemId = 2, NutrientType = ENutrients.Carb,    Grams = 17.0 },
-                new Nutrient { Id = 6, ItemId = 2, NutrientType = ENutrients.Protein, Grams = 2.0  },
-                new Nutrient { Id = 7, ItemId = 3, NutrientType = ENutrients.Fat,     Grams = 17   },
-                new Nutrient { Id = 8, ItemId = 3, NutrientType = ENutrients.Carb,    Grams = 3.1  },
-                new Nutrient { Id = 9, ItemId = 3, NutrientType = ENutrients.Protein, Grams = 28.0 }
+                new Nutrient { Id = 1, ItemId = 1, NutrientType = ENutrientType.Fat,     Grams = 1.3  },
+                new Nutrient { Id = 2, ItemId = 1, NutrientType = ENutrientType.Carb,    Grams = 0.0  },
+                new Nutrient { Id = 3, ItemId = 1, NutrientType = ENutrientType.Protein, Grams = 28.0 },
+                new Nutrient { Id = 4, ItemId = 2, NutrientType = ENutrientType.Fat,     Grams = 0.09 },
+                new Nutrient { Id = 5, ItemId = 2, NutrientType = ENutrientType.Carb,    Grams = 17.0 },
+                new Nutrient { Id = 6, ItemId = 2, NutrientType = ENutrientType.Protein, Grams = 2.0  },
+                new Nutrient { Id = 7, ItemId = 3, NutrientType = ENutrientType.Fat,     Grams = 17   },
+                new Nutrient { Id = 8, ItemId = 3, NutrientType = ENutrientType.Carb,    Grams = 3.1  },
+                new Nutrient { Id = 9, ItemId = 3, NutrientType = ENutrientType.Protein, Grams = 28.0 }
             );
         }
     }

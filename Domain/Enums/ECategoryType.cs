@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodLog.Domain.Enums
 {
-    public enum ECategories
+    public enum ECategoryType
     {
         Vegetables,
         Fruits,

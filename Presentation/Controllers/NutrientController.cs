@@ -20,7 +20,7 @@ namespace FoodLog.Presentation.ConsoleApp.Controllers
             return _service.Get();
         }
 
-        public IEnumerable<Nutrient> Get(int id)
+        public Nutrient Get(int id)
         {
             return _service.Get(id);
         }

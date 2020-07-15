@@ -1,10 +1,7 @@
 ﻿using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodLog.Application.Services
 {
@@ -20,9 +17,9 @@ namespace FoodLog.Application.Services
             return _context.Nutrients;
         }
 
-        public IEnumerable<Nutrient> Get(int id)
+        public Nutrient Get(int id)
         {
-            return _context.Nutrients.Where(item => item.Id.Equals(id));
+            return _context.Nutrients.Where(item => item.Id.Equals(id)).First();
         }
 
         public int Add(Nutrient item)

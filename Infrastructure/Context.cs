@@ -1,12 +1,9 @@
 ﻿using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
+using FoodLog.Infrastructure.Configuration;
 using FoodLog.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Threading.Tasks;
 
 namespace FoodLog.Infrastructure
@@ -25,6 +22,9 @@ namespace FoodLog.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ItemConfiguration());
+            modelBuilder.ApplyConfiguration(new NutrientConfiguration());
+
             modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
@@ -33,13 +33,13 @@ namespace FoodLog.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=FoodLog;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=true");
+            optionsBuilder.EnableSensitiveDataLogging();
 
             base.OnConfiguring(optionsBuilder);
         }
 
         public async Task SaveChangesAsync()
         {
-            // TODO: Audit
             await base.SaveChangesAsync();
         }
     }

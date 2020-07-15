@@ -18,9 +18,9 @@ namespace FoodLog.Application.Services
             return _context.Items;
         }
 
-        public IEnumerable<Item> Get(int id)
+        public Item Get(int id)
         {
-            return _context.Items.Where(item => item.Id.Equals(id));
+            return _context.Items.Where(item => item.Id.Equals(id)).First();
         }
 
         public IEnumerable<Item> Get(DateTime dateTime)
@@ -32,7 +32,7 @@ namespace FoodLog.Application.Services
         {
             var entity = _context.Items.First(i => i.Id.Equals(item.Id));
 
-            if (entity is null)
+            if (entity == null)
             {
                 return -1;
             }
@@ -48,7 +48,7 @@ namespace FoodLog.Application.Services
         {
             var entity = _context.Items.First(i => i.Id.Equals(item.Id));
 
-            if (entity is null)
+            if (entity == null)
             {
                 return -1;
             }
@@ -64,7 +64,7 @@ namespace FoodLog.Application.Services
         {
             var entity = _context.Items.First(i => i.Id.Equals(id));
 
-            if (entity is null)
+            if (entity == null)
             {
                 return -1;
             }
