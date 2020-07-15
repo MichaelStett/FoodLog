@@ -8,7 +8,6 @@ namespace FoodLog.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.ToTable("Items");
             builder.HasKey(i => i.Id);
 
             builder.Property(i => i.Id)
@@ -19,6 +18,7 @@ namespace FoodLog.Infrastructure.Configuration
                    .IsRequired();
 
             builder.Property(i => i.Date)
+                   .HasColumnType("date")
                    .IsRequired();
 
             builder.Property(i => i.Grams)
@@ -27,8 +27,6 @@ namespace FoodLog.Infrastructure.Configuration
             builder.Property(i => i.CategoryType)
                    .IsRequired();
 
-            builder.Property(i => i.Nutrients)
-                   .IsRequired();
         }
     }
 }

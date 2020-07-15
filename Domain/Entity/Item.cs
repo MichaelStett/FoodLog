@@ -11,6 +11,6 @@ namespace FoodLog.Domain.Entity
         public DateTime Date { get; set; }
         public int Grams { get; set; }
         public ECategoryType CategoryType { get; set; }
-        public IEnumerable<Nutrient> Nutrients { get; set; } = new List<Nutrient>();
+        public List<Nutrient> Nutrients { get; set; } = new List<Nutrient>();
     }
 }

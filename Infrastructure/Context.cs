@@ -4,6 +4,7 @@ using FoodLog.Infrastructure.Configuration;
 using FoodLog.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoodLog.Infrastructure

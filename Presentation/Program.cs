@@ -1,11 +1,13 @@
 ﻿using FoodLog.Application;
 using FoodLog.Domain.Entity;
-using FoodLog.Domain.Enums;
 using FoodLog.Domain.Interfaces;
 using FoodLog.Infrastructure;
 using FoodLog.Presentation.ConsoleApp.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using static System.Console;
 
 namespace FoodLog.Presentation.ConsoleApp
 {
@@ -18,23 +20,59 @@ namespace FoodLog.Presentation.ConsoleApp
                 .AddApplication()
                 .BuildServiceProvider();
 
-            var NController = new NutrientController(services.GetService<INutrientService>());
+            ItemControllerTest(services, 4);
+        }
 
-            NController.Put(new Nutrient
+        private static void ItemControllerTest(ServiceProvider services, int testNo)
+        {
+            var service = services.GetService<IItemService>();
+
+            var controller = new ItemController(service);
+
+            switch (testNo)
             {
-                Id = 1,
-                ItemId = 1,
-                NutrientType = ENutrientType.Fat,
-                Grams = 1.5
-            });
+                case 1: // GetAll
+                    {
+                        var items = controller.Get();
 
-            var IController = new ItemController(services.GetService<IItemService>());
 
-            var item = IController.Get(1);
+                        items.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
+                    }
+                    break;
+                case 2: // GetById
+                    {
+                        var items = new List<Item>
+                        {
+                            controller.Get(1),
+                            controller.Get(2),
+                            controller.Get(3),
+                        };
 
-            foreach (var nutrient in item.Nutrients)
-            {
-                Console.WriteLine($"{nutrient.NutrientType}: {nutrient.Grams}");
+                        items.ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
+                    }
+                    break;
+                case 3: // GetByDate
+                    {
+                        var items = controller.Get(DateTime.UtcNow);
+
+                        items.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
+                    }
+                    break;
+                case 4:
+                    {
+                        var item = new Item
+                        {
+                            Id = 4,
+                        };
+
+                        var id = controller.Post(item);
+
+                        WriteLine(id);
+                    }
+                    break;
+                default:
+                    break;
+
             }
         }
     }

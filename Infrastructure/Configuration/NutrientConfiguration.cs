@@ -8,8 +8,7 @@ namespace FoodLog.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<Nutrient> builder)
         {
-            builder.ToTable("Nutrients");
-            builder.HasKey(i => i.Id);
+            builder.HasKey(i => new { i.Id, i.ItemId});
 
             builder.Property(i => i.Id)
                    .IsRequired()
@@ -17,15 +16,10 @@ namespace FoodLog.Infrastructure.Configuration
 
             builder.Property(i => i.ItemId)
                    .IsRequired();
-            builder.HasIndex(i => i.ItemId)
-                   .IsUnique();
 
             builder.Property(i => i.NutrientType)
                    .IsRequired();
 
-            builder.HasOne(i => i.Item)
-                .WithMany(i => i.Nutrients)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

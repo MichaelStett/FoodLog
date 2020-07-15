@@ -1,4 +1,5 @@
-﻿using FoodLog.Domain.Entity;
+﻿using FoodLog.Application.Validators;
+using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace FoodLog.Application.Services
     public class ItemService : IItemService
     {
         private readonly IContext _context;
+        private readonly ItemValidator _validator = new ItemValidator();
 
         public ItemService(IContext context)
             => (_context) = (context);
@@ -30,18 +32,24 @@ namespace FoodLog.Application.Services
 
         public int Add(Item item)
         {
-            var entity = _context.Items.First(i => i.Id.Equals(item.Id));
-
-            if (entity == null)
+            if (_context.Items.Any(i => i.Id.Equals(item.Id)))
             {
                 return -1;
             }
 
-            var entry = _context.Items.Add(item);
+            var result = _validator.Validate(item);
 
-            _context.SaveChangesAsync();
+            if (result.IsValid)
+            {
+                var entry = _context.Items.Add(item);
 
-            return entry.Entity.Id;
+                _context.SaveChangesAsync();
+
+                return entry.Entity.Id;
+            }
+
+            Console.WriteLine("Invalid object");
+            return -1;
         }
 
         public int Update(Item item)
