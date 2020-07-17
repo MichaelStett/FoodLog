@@ -33,9 +33,6 @@ namespace FoodLog.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=FoodLog;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=true");
-            optionsBuilder.EnableSensitiveDataLogging();
-
             base.OnConfiguring(optionsBuilder);
         }
 

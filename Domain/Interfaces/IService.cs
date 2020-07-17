@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using FoodLog.Domain.Other;
+using System.Collections.Generic;
 
 namespace FoodLog.Domain.Interfaces
 {
     public interface IService<T>
     {
-        IEnumerable<T> Get();
-        T Get(int id);
-        int Add(T item);
-        int Update(T item);
-        int Delete(int id);
+        Result<IEnumerable<T>> Get();
+        Result<T> Get(int id);
+        Result<int> Add(T item);
+        Result<int> Update(T item);
+        Result<int> Delete(int id);
     }
 }

@@ -1,48 +1,34 @@
 ﻿using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
+using FoodLog.Domain.Other;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodLog.Presentation.ConsoleApp.Controllers
 {
     public class ItemController
     {
-        private readonly IItemService _service;
+        readonly IItemService _service;
 
         public ItemController(IItemService service)
             => (_service) = (service);
 
-        public IEnumerable<Item> Get()
-        {
-            return _service.Get();
-        }
+        public Result<IEnumerable<Item>> Get()
+            => _service.Get();
 
-        public Item Get(int id)
-        {
-            return _service.Get(id);
-        }
+        public Result<Item> Get(int id)
+            => _service.Get(id);
 
-        public IEnumerable<Item> Get(DateTime dateTime)
-        {
-            return _service.Get(dateTime);
-        }
+        public Result<IEnumerable<Item>> Get(DateTime dateTime)
+            => _service.Get(dateTime);
 
-        public int Post(Item item)
-        {
-            return _service.Add(item);
-        }
+        public Result<int> Post(Item item)
+            => _service.Add(item);
 
-        public int Put(Item item)
-        {
-            return _service.Update(item);
-        }
+        public Result<int> Put(Item item)
+            => _service.Update(item);
 
-        public int Delete(int id)
-        {
-            return _service.Delete(id);
-        }
+        public Result<int> Delete(int id)
+            => _service.Delete(id);
     }
 }

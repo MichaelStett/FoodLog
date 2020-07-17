@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using static System.Console;
 
 namespace FoodLog.Presentation.ConsoleApp
@@ -20,10 +21,10 @@ namespace FoodLog.Presentation.ConsoleApp
                 .AddApplication()
                 .BuildServiceProvider();
 
-            ItemControllerTest(services, 4);
+            ItemControllerTest(services, 1);
         }
 
-        private static void ItemControllerTest(ServiceProvider services, int testNo)
+        static void ItemControllerTest(ServiceProvider services, int testNo)
         {
             var service = services.GetService<IItemService>();
 
@@ -36,16 +37,15 @@ namespace FoodLog.Presentation.ConsoleApp
                         var items = controller.Get();
 
 
-                        items.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
+                        items.Value.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
                     }
                     break;
                 case 2: // GetById
                     {
                         var items = new List<Item>
                         {
-                            controller.Get(1),
-                            controller.Get(2),
-                            controller.Get(3),
+                            controller.Get(1).Value,
+                            controller.Get(2).Value,
                         };
 
                         items.ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
@@ -55,7 +55,7 @@ namespace FoodLog.Presentation.ConsoleApp
                     {
                         var items = controller.Get(DateTime.UtcNow);
 
-                        items.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
+                        items.Value.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
                     }
                     break;
                 case 4:

@@ -1,87 +1,117 @@
 ﻿using FoodLog.Application.Validators;
 using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
+using FoodLog.Domain.Other;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using static FoodLog.Domain.Enums.EOperationStatus;
 
 namespace FoodLog.Application.Services
 {
     public class ItemService : IItemService
     {
-        private readonly IContext _context;
-        private readonly ItemValidator _validator = new ItemValidator();
+        readonly IContext _context;
+        readonly ItemValidator _validator = new ItemValidator();
 
         public ItemService(IContext context)
             => (_context) = (context);
 
-        public IEnumerable<Item> Get()
+        public Result<IEnumerable<Item>> Get()
         {
-            return _context.Items;
+            var data = _context.Items;
+
+            if (!data.Any())
+            {
+                return Result<IEnumerable<Item>>.Create(status: Error, null);
+            }
+
+            return Result<IEnumerable<Item>>.Create(status: Success, data);
         }
 
-        public Item Get(int id)
+        public Result<Item> Get(int id)
         {
-            return _context.Items.Where(item => item.Id.Equals(id)).First();
+            var data = _context.Items.Where(item => item.Id.Equals(id)).FirstOrDefault();
+
+            if (data == null)
+            {
+                return Result<Item>.Create(status: Error, null);
+            }
+
+            return Result<Item>.Create(status: Success, data);
         }
 
-        public IEnumerable<Item> Get(DateTime dateTime)
+        public Result<IEnumerable<Item>> Get(DateTime dateTime)
         {
-            return _context.Items.Where(i => i.Date.Date.Equals(dateTime.Date));
+            var data = _context.Items.Where(i => i.Date.Date.Equals(dateTime.Date));
+
+            if (!data.Any())
+            {
+                return Result<IEnumerable<Item>>.Create(status: Error, null);
+            }
+
+            return Result<IEnumerable<Item>>.Create(status: Success, data);
         }
 
-        public int Add(Item item)
+        public Result<int> Add(Item item)
         {
             if (_context.Items.Any(i => i.Id.Equals(item.Id)))
             {
-                return -1;
+                return Result<int>.Create(status: Error, -1);
             }
 
             var result = _validator.Validate(item);
 
-            if (result.IsValid)
+            if (!result.IsValid)
             {
-                var entry = _context.Items.Add(item);
-
-                _context.SaveChangesAsync();
-
-                return entry.Entity.Id;
+                return Result<int>.Create(status: Error, -1);
             }
 
-            Console.WriteLine("Invalid object");
-            return -1;
+            var entry = _context.Items.Add(item);
+
+            _context.SaveChangesAsync();
+
+            return Result<int>.Create(status: Success, entry.Entity.Id);
         }
 
-        public int Update(Item item)
+        public Result<int> Update(Item item)
         {
-            var entity = _context.Items.First(i => i.Id.Equals(item.Id));
+            var entity = _context.Items.FirstOrDefault(i => i.Id.Equals(item.Id));
 
             if (entity == null)
             {
-                return -1;
+                return Result<int>.Create(status: Error, -1);
+            }
+
+            var result = _validator.Validate(item);
+
+            if (!result.IsValid)
+            {
+                return Result<int>.Create(status: Error, -1);
             }
 
             var entry = _context.Items.Update(item);
 
             _context.SaveChangesAsync();
 
-            return entry.Entity.Id;
+            return Result<int>.Create(status: Success, entry.Entity.Id);
         }
 
-        public int Delete(int id)
+        public Result<int> Delete(int id)
         {
-            var entity = _context.Items.First(i => i.Id.Equals(id));
+            var entity = _context.Items.FirstOrDefault(i => i.Id.Equals(id));
 
             if (entity == null)
             {
-                return -1;
+                return Result<int>.Create(status: Error, -1);
             }
 
             var entry = _context.Items.Remove(entity);
 
             _context.SaveChangesAsync();
 
-            return entry.Entity.Id;
+            return Result<int>.Create(status: Success, entry.Entity.Id);
         }
     }
 }
