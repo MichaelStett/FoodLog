@@ -56,14 +56,14 @@ namespace FoodLog.Application.Services
 
         public Result<int> Add(Item item)
         {
-            if (_context.Items.Any(i => i.Id.Equals(item.Id)))
+            var result = _validator.Validate(item);
+
+            if (!result.IsValid)
             {
                 return Result<int>.Create(status: Error, -1);
             }
 
-            var result = _validator.Validate(item);
-
-            if (!result.IsValid)
+            if (_context.Items.Any(i => i.Id.Equals(item.Id)))
             {
                 return Result<int>.Create(status: Error, -1);
             }
@@ -77,16 +77,16 @@ namespace FoodLog.Application.Services
 
         public Result<int> Update(Item item)
         {
-            var entity = _context.Items.FirstOrDefault(i => i.Id.Equals(item.Id));
+            var result = _validator.Validate(item);
 
-            if (entity == null)
+            if (!result.IsValid)
             {
                 return Result<int>.Create(status: Error, -1);
             }
 
-            var result = _validator.Validate(item);
+            var entity = _context.Items.FirstOrDefault(i => i.Id.Equals(item.Id));
 
-            if (!result.IsValid)
+            if (entity == null)
             {
                 return Result<int>.Create(status: Error, -1);
             }

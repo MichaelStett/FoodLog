@@ -8,12 +8,7 @@ namespace FoodLog.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-
-            services.AddDbContext<Context>(opt =>
-            {
-                opt.EnableSensitiveDataLogging();
-                opt.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=FoodLog;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=true");
-            });
+            services.AddDbContext<Context>();
 
             services.AddSingleton<IContext, Context>();
             services.AddSingleton<IDateTime, MachineDateTime>();

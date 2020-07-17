@@ -24,7 +24,7 @@ namespace Tests.Controllers
 
         int execute()
         {
-            return _controller.Post(new Item
+            var result = _controller.Post(new Item
             {
                 Id = 1,
                 Name = "Tuna",
@@ -32,6 +32,8 @@ namespace Tests.Controllers
                 Grams = 100,
                 Date = DateTime.UtcNow
             });
+
+            return result.Value;
         }
 
         [Fact]

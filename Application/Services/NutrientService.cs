@@ -1,4 +1,5 @@
-﻿using FoodLog.Domain.Entity;
+﻿using FoodLog.Application.Validators;
+using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
 using FoodLog.Domain.Other;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace FoodLog.Application.Services
     public class NutrientService : INutrientService
     {
         readonly IContext _context;
+        readonly NutrientValidator _validator = new NutrientValidator();
+
 
         public NutrientService(IContext context)
             => (_context) = (context);
@@ -41,6 +44,13 @@ namespace FoodLog.Application.Services
 
         public Result<int> Add(Nutrient item)
         {
+            var result = _validator.Validate(item);
+
+            if (!result.IsValid)
+            {
+                return Result<int>.Create(status: Error, -1);
+            }
+
             var entity = _context.Nutrients.FirstOrDefault(i => i.Id.Equals(item.Id));
 
             if (entity == null)
@@ -57,6 +67,13 @@ namespace FoodLog.Application.Services
 
         public Result<int> Update(Nutrient item)
         {
+            var result = _validator.Validate(item);
+
+            if (!result.IsValid)
+            {
+                return Result<int>.Create(status: Error, -1);
+            }
+
             var entity = _context.Nutrients.FirstOrDefault(i => i.Id.Equals(item.Id));
 
             if (entity == null)

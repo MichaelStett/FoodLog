@@ -4,7 +4,6 @@ using FoodLog.Domain.Interfaces;
 using FoodLog.Infrastructure;
 using FoodLog.Presentation.ConsoleApp.Controllers;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +20,6 @@ namespace FoodLog.Presentation.ConsoleApp
                 .AddApplication()
                 .BuildServiceProvider();
 
-            ItemControllerTest(services, 1);
         }
 
         static void ItemControllerTest(ServiceProvider services, int testNo)
@@ -35,7 +33,6 @@ namespace FoodLog.Presentation.ConsoleApp
                 case 1: // GetAll
                     {
                         var items = controller.Get();
-
 
                         items.Value.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
                     }
@@ -53,7 +50,9 @@ namespace FoodLog.Presentation.ConsoleApp
                     break;
                 case 3: // GetByDate
                     {
-                        var items = controller.Get(DateTime.UtcNow);
+                        var dateTime = services.GetService<IDateTime>();
+
+                        var items = controller.Get(dateTime.Now);
 
                         items.Value.ToList().ForEach(item => WriteLine($"{item.Name}: {item.Grams}"));
                     }

@@ -1,7 +1,12 @@
-﻿using FoodLog.Domain.Entity;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using FoodLog.Domain.Entity;
 using FoodLog.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 
 namespace FoodLog.Infrastructure.Extensions
 {
@@ -47,6 +52,19 @@ namespace FoodLog.Infrastructure.Extensions
                 new Nutrient { Id = 8, ItemId = 3, NutrientType = ENutrientType.Carb,    Grams = 3.1  },
                 new Nutrient { Id = 9, ItemId = 3, NutrientType = ENutrientType.Protein, Grams = 28.0 }
             );
+        }
+
+        public static void SeedFromCsv(this ModelBuilder modelBuilder)
+        {
+            using var reader = new StreamReader(@"./food-data.csv");
+
+            using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+
+            var records = csv.GetRecords<Food>();
+
+            var withId = records.Select((x, id) => { x.Id = id; return x;  });
+
+            modelBuilder.Entity<Food>().HasData(records);
         }
     }
 }
