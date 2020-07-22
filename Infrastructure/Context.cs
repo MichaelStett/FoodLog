@@ -10,7 +10,6 @@ namespace FoodLog.Infrastructure
     public class Context : DbContext, IContext
     {
         public DbSet<Item> Items { get; set; }
-        public DbSet<Nutrient> Nutrients { get; set; }
         public DbSet<Food> Foods { get; set; }
 
         public Context()
@@ -23,7 +22,6 @@ namespace FoodLog.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ItemConfiguration());
-            modelBuilder.ApplyConfiguration(new NutrientConfiguration());
             modelBuilder.ApplyConfiguration(new FoodConfiguration());
 
             modelBuilder.SeedFromCsv();

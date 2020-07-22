@@ -20,10 +20,6 @@ namespace FoodLog.Application.Validators
             RuleFor(i => i.CategoryType)
                 .NotEmpty()
                 .IsInEnum();
-
-            RuleFor(i => i.Nutrients)
-                .NotEmpty()
-                .Must(i => i.Count == 3);
         }
     }
 }

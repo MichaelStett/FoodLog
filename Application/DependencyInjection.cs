@@ -14,7 +14,6 @@ namespace FoodLog.Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddSingleton<IItemService, ItemService>();
-            services.AddSingleton<INutrientService, NutrientService>();
 
             return services;
         }

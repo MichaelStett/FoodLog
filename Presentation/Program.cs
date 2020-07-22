@@ -16,10 +16,13 @@ namespace FoodLog.Presentation.ConsoleApp
         static void Main(string[] args)
         {
             var services = new ServiceCollection()
+                .AddLogging()
                 .AddInfrastructure()
                 .AddApplication()
                 .BuildServiceProvider();
 
+
+            ItemControllerTest(services, 1);
         }
 
         static void ItemControllerTest(ServiceProvider services, int testNo)
