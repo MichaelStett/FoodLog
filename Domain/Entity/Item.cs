@@ -1,6 +1,4 @@
-﻿using FoodLog.Domain.Enums;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace FoodLog.Domain.Entity
 {
@@ -11,6 +9,6 @@ namespace FoodLog.Domain.Entity
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public int Grams { get; set; }
-        public ECategoryType CategoryType { get; set; }
+        public string Category { get; set; }
     }
 }

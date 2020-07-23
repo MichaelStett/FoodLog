@@ -10,7 +10,7 @@ using static FoodLog.Domain.Enums.EOperationStatus;
 
 namespace FoodLog.Application.Services
 {
-    public class ItemService : IItemService
+    public class ItemService : IService<Item>
     {
         readonly IContext _context;
         readonly ItemValidator _validator = new ItemValidator();

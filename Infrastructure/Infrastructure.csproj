@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <None Update="Resources\food-data.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

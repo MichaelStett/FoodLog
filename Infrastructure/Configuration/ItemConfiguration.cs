@@ -24,7 +24,7 @@ namespace FoodLog.Infrastructure.Configuration
             builder.Property(i => i.Grams)
                    .IsRequired();
 
-            builder.Property(i => i.CategoryType)
+            builder.Property(i => i.Category)
                    .IsRequired();
 
         }

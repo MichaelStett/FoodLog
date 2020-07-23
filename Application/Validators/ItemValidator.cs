@@ -17,9 +17,8 @@ namespace FoodLog.Application.Validators
             RuleFor(i => i.Date)
                 .NotEmpty();
 
-            RuleFor(i => i.CategoryType)
-                .NotEmpty()
-                .IsInEnum();
+            RuleFor(i => i.Category)
+                .NotEmpty();
         }
     }
 }

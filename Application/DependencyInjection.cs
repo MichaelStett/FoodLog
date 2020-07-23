@@ -1,4 +1,5 @@
 ﻿using FoodLog.Application.Services;
+using FoodLog.Domain.Entity;
 using FoodLog.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -13,7 +14,8 @@ namespace FoodLog.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddSingleton<IItemService, ItemService>();
+            services.AddTransient<IService<Item>, ItemService>();
+            services.AddTransient<IService<Food>, FoodService>();
 
             return services;
         }

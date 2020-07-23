@@ -12,9 +12,6 @@ namespace FoodLog.Infrastructure
         public DbSet<Item> Items { get; set; }
         public DbSet<Food> Foods { get; set; }
 
-        public Context()
-        { }
-
         public Context(DbContextOptions<Context> options)
             : base(options)
         { }
@@ -31,9 +28,6 @@ namespace FoodLog.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=FoodLog;Trusted_Connection=True;ConnectRetryCount=0;MultipleActiveResultSets=true");
-
             base.OnConfiguring(optionsBuilder);
         }
 

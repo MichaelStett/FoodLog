@@ -13,7 +13,7 @@ namespace FoodLog.Infrastructure.Extensions
     {
         public static void SeedFromCsv(this ModelBuilder modelBuilder)
         {
-            using var reader = new StreamReader(@"./food-data.csv");
+            using var reader = new StreamReader("../Infrastructure/Resources/food-data.csv");
 
             using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
