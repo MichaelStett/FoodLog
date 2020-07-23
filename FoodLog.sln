@@ -12,6 +12,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{8BD28933-6E13-4682-A02D-708183604953}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation\Presentation.csproj", "{273AD21F-5654-4182-8A96-74B9A4C7B554}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F4746A58-7521-42AC-B32C-A782F6A334DD} = {F4746A58-7521-42AC-B32C-A782F6A334DD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
